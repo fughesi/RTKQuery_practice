@@ -1,0 +1,16 @@
+body {
+  max-width: 80%;
+  box-sizing: border-box;
+  margin: 1.5rem;
+  overflow-x: hidden;
+}
+
+h2 {
+  color: brown;
+  font-size: 2rem;
+}
+
+p {
+  /* font-size: 0.5rem; */
+  word-wrap: break-word;
+}
