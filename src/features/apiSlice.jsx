@@ -3,18 +3,17 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000/" }),
+  tagTypes: ["Products"],
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => "products",
       method: "GET",
+      providesTags: ["Products"],
     }),
-    // getOneProduct: builder.query({
-    //   query: (product) => `products/search?q=${product}`,
-    //   method: "GET",
-    // }),
     getProductById: builder.query({
       query: (id) => `products/${id}`,
       method: "GET",
+      providesTags: ["Products"],
     }),
     addProduct: builder.mutation({
       query: (product) => ({
@@ -22,6 +21,7 @@ export const productsApi = createApi({
         method: "POST",
         body: product,
       }),
+      invalidatesTags: ["Products"],
     }),
     updateProduct: builder.mutation({
       query: ({ id, ...rest }) => ({
@@ -29,19 +29,20 @@ export const productsApi = createApi({
         method: "PUT",
         body: rest,
       }),
+      invalidatesTags: ["Products"],
     }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         url: `products/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Products"],
     }),
   }),
 });
 
 export const {
   useGetAllProductsQuery,
-  useGetOneProductQuery,
   useGetProductByIdQuery,
   useAddProductMutation,
   useDeleteProductMutation,
